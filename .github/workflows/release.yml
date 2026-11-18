@@ -121,7 +121,10 @@ jobs:
         run: |
           npm install --global cloudron
           test "$(jq -r --arg version "${VERSION}" '.versions[$version].publishState' CloudronVersions.json)" = "testing"
-          cloudron versions update --version "${VERSION}" --state published
+          IMAGE="$(jq -r --arg version "${VERSION}" '.versions[$version].manifest.dockerImage' CloudronVersions.json)"
+          test -n "${IMAGE}"
+          test "${IMAGE}" != "null"
+          cloudron versions update --version "${VERSION}" --image "${IMAGE}" --state published
           cloudron versions verify
 
       - name: Commit published catalog
