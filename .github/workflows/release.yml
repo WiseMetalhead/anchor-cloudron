@@ -101,7 +101,7 @@ jobs:
           git commit -m "release: package ${VERSION} for testing"
           git tag -a "v${VERSION}" -m "Anchor Cloudron package ${VERSION}"
           git push origin HEAD:main "v${VERSION}"
-          gh release create "v${VERSION}" --title "Anchor Cloudron ${VERSION}" --generate-notes
+          gh release create "v${VERSION}" --title "Anchor Cloudron ${VERSION}" --generate-notes --prerelease
 
   promote-published:
     if: inputs.operation == 'promote-published'
@@ -126,6 +126,7 @@ jobs:
 
       - name: Commit published catalog
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ inputs.version }}
         run: |
           git config user.name github-actions[bot]
@@ -133,3 +134,4 @@ jobs:
           git add CloudronVersions.json
           git commit -m "release: publish package ${VERSION}"
           git push origin HEAD:main
+          gh release edit "v${VERSION}" --prerelease=false
