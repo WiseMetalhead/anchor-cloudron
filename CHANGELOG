@@ -1,3 +1,6 @@
+[1.0.2]
+* Simplify the post-install message while retaining authentication-specific guidance and the setup checklist.
+
 [1.0.1]
 * Fix mobile Cloudron OIDC login by using a separate public PKCE client.
 * Require Cloudron 10.1.4 or newer for native OIDC client support.
