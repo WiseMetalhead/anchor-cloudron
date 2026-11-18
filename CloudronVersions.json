@@ -165,8 +165,8 @@
                 "dockerImage": "ghcr.io/wisemetalhead/anchor-cloudron@sha256:1b75f84ba59b4969807c2dc347b97f60f0714c702433f6ede7921249a7324fa4"
             },
             "creationDate": "Wed, 18 Nov 2026 09:44:09 GMT",
-            "ts": "Wed, 18 Nov 2026 09:44:09 GMT",
-            "publishState": "testing"
+            "ts": "Wed, 18 Nov 2026 09:46:06 GMT",
+            "publishState": "published"
         }
     }
 }
