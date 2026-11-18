@@ -1,14 +1,14 @@
 {
   "id": "io.github.wisemetalhead.anchor",
   "title": "Anchor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "upstreamVersion": "0.18.1",
   "tagline": "Offline-first, self-hosted notes",
   "website": "https://github.com/ZhFahim/anchor",
   "packageUrl": "https://github.com/WiseMetalhead/anchor-cloudron",
   "packagerName": "WiseMetalhead",
   "packagerUrl": "https://github.com/WiseMetalhead",
-  "minBoxVersion": "10.0.0",
+  "minBoxVersion": "10.1.4",
   "healthCheckPath": "/api/health",
   "httpPort": 3000,
   "memoryLimit": 536870912,
@@ -30,7 +30,8 @@
     "localstorage": {},
     "postgresql": {},
     "oidc": {
-      "loginRedirectUri": "/api/auth/oidc/callback, anchor://oidc/callback",
+      "loginRedirectUri": "/api/auth/oidc/callback",
+      "publicClientLoginRedirectUri": "anchor://oidc/callback",
       "tokenSignatureAlgorithm": "RS256"
     }
   },

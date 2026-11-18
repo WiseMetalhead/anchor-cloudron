@@ -44,6 +44,7 @@ start_app() {
             --env CLOUDRON_OIDC_ISSUER=https://my.example.test/openid
             --env CLOUDRON_OIDC_CLIENT_ID=anchor-test-client
             --env CLOUDRON_OIDC_CLIENT_SECRET=anchor-test-secret
+            --env CLOUDRON_OIDC_PUBLIC_CLIENT_ID=anchor-test-public-client
         )
     fi
 
@@ -101,6 +102,6 @@ docker rm -f "${APP_CONTAINER}" >/dev/null
 start_app true
 wait_for_health
 docker exec "${APP_CONTAINER}" curl -fsS http://127.0.0.1:3000/api/auth/oidc/config \
-    | jq -e '.enabled == true and .providerName == "Cloudron" and .disableInternalAuth == true and .issuerUrl == "https://my.example.test/openid" and .clientId == "anchor-test-client"' >/dev/null
+    | jq -e '.enabled == true and .providerName == "Cloudron" and .disableInternalAuth == true and .issuerUrl == "https://my.example.test/openid" and .clientId == "anchor-test-public-client"' >/dev/null
 
 echo "Anchor smoke test passed"

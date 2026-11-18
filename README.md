@@ -4,6 +4,8 @@ This repository packages [Anchor](https://github.com/ZhFahim/anchor) as a Cloudr
 
 The package builds a pinned Anchor release from source, uses the managed Cloudron PostgreSQL service, stores uploads and the JWT secret in `/app/data`, and supports optional Cloudron OpenID Connect. When SSO is selected during installation, local password login is disabled.
 
+The package carries a minimal compatibility patch that exposes Cloudron's separate public PKCE client ID to the Anchor mobile app. The server-side web flow continues to use the confidential client and its secret.
+
 ## Install
 
 Add this Community App URL in the Cloudron dashboard:

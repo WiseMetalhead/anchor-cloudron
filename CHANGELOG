@@ -1,3 +1,7 @@
+[1.0.1]
+* Fix mobile Cloudron OIDC login by using a separate public PKCE client.
+* Require Cloudron 10.1.4 or newer for native OIDC client support.
+
 [1.0.0]
 * Initial Cloudron package for Anchor 0.18.1.
 * Add optional Cloudron OpenID Connect with web and mobile callbacks.

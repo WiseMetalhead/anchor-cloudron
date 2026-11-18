@@ -14,14 +14,21 @@ ENV PATH=/usr/local/node/bin:$PATH
 FROM node-base AS build
 
 ARG PNPM_VERSION=12.16.1
-RUN npm install --global "pnpm@${PNPM_VERSION}"
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends patch && \
+    rm -rf /var/cache/apt /var/lib/apt/lists && \
+    npm install --global "pnpm@${PNPM_VERSION}"
+
+COPY patches/0001-oidc-public-mobile-client.patch /tmp/0001-oidc-public-mobile-client.patch
 
 # renovate: datasource=github-releases depName=zhfahim/anchor versioning=semver extractVersion=^v(?<version>.+)$
 ARG ANCHOR_VERSION=0.18.1
 
 RUN mkdir -p /app/build && \
     curl -fsSL "https://github.com/ZhFahim/anchor/archive/refs/tags/v${ANCHOR_VERSION}.tar.gz" \
-      | tar -xz -C /app/build --strip-components=1 -f -
+      | tar -xz -C /app/build --strip-components=1 -f - && \
+    cd /app/build && \
+    patch --batch --forward --strip=1 < /tmp/0001-oidc-public-mobile-client.patch
 
 WORKDIR /app/build/server
 RUN pnpm install --frozen-lockfile && \

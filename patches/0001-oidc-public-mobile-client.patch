@@ -1,0 +1,29 @@
+From: Anchor Cloudron Packagers <80715843+WiseMetalhead@users.noreply.github.com>
+Subject: [PATCH] Allow a separate public OIDC client for mobile login
+
+Cloudron provisions a confidential client for the server-side web flow and a
+public PKCE client for native applications. Expose the public client ID to the
+mobile app while retaining the confidential client for the server-side flow.
+
+---
+ server/src/auth/oidc/oidc-config.service.ts | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/server/src/auth/oidc/oidc-config.service.ts b/server/src/auth/oidc/oidc-config.service.ts
+index 0d0f4f1..c4eb4e7 100644
+--- a/server/src/auth/oidc/oidc-config.service.ts
++++ b/server/src/auth/oidc/oidc-config.service.ts
+@@ -148,7 +148,9 @@ export class OidcConfigService {
+       enabled,
+       providerName: config.providerName,
+       issuerUrl: config.issuerUrl,
+-      clientId: config.clientId,
++      clientId:
++        this.configService.get<string>('OIDC_PUBLIC_CLIENT_ID') ||
++        config.clientId,
+       disableInternalAuth: enabled && config.disableInternalAuth,
+     };
+   }
+-- 
+2.51.2
+
