@@ -1,0 +1,49 @@
+{
+  "id": "io.github.wisemetalhead.anchor",
+  "title": "Anchor",
+  "version": "1.0.0",
+  "upstreamVersion": "0.18.1",
+  "tagline": "Offline-first, self-hosted notes",
+  "website": "https://github.com/ZhFahim/anchor",
+  "packageUrl": "https://github.com/WiseMetalhead/anchor-cloudron",
+  "packagerName": "WiseMetalhead",
+  "packagerUrl": "https://github.com/WiseMetalhead",
+  "minBoxVersion": "10.0.0",
+  "healthCheckPath": "/api/health",
+  "httpPort": 3000,
+  "memoryLimit": 536870912,
+  "iconUrl": "https://raw.githubusercontent.com/WiseMetalhead/anchor-cloudron/main/logo.png",
+  "description": "file://DESCRIPTION.md",
+  "postInstallMessage": "file://POSTINSTALL.md",
+  "changelog": "file://CHANGELOG",
+  "tags": [
+    "notes",
+    "markdown",
+    "offline",
+    "productivity"
+  ],
+  "mediaLinks": [
+    "https://raw.githubusercontent.com/WiseMetalhead/anchor-cloudron/main/screenshots/web-light.png",
+    "https://raw.githubusercontent.com/WiseMetalhead/anchor-cloudron/main/screenshots/web-dark.png"
+  ],
+  "addons": {
+    "localstorage": {},
+    "postgresql": {},
+    "oidc": {
+      "loginRedirectUri": "/api/auth/oidc/callback, anchor://oidc/callback",
+      "tokenSignatureAlgorithm": "RS256"
+    }
+  },
+  "optionalSso": true,
+  "checklist": {
+    "first-oidc-admin": {
+      "sso": true,
+      "message": "Sign in with Cloudron. The first user to sign in becomes the Anchor administrator."
+    },
+    "first-local-admin": {
+      "sso": false,
+      "message": "Register the first local account. The first registered user becomes the Anchor administrator."
+    }
+  },
+  "manifestVersion": 2
+}

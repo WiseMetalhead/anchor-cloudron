@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Validate package metadata
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes shellcheck
+          curl -fsSL https://docs.cloudron.io/assets/files/manifest-a04f98c1a725ad05abcb387107798a43.json -o /tmp/cloudron-manifest-schema.json
+          pipx run check-jsonschema --schemafile /tmp/cloudron-manifest-schema.json CloudronManifest.json
+          jq --exit-status '.stable == true and (.versions | type == "object")' CloudronVersions.json >/dev/null
+          bash -n start.sh scripts/check-metadata.sh test/smoke.sh
+          shellcheck start.sh scripts/check-metadata.sh test/smoke.sh
+          ./scripts/check-metadata.sh
+
+      - name: Build package image
+        run: docker build --tag anchor-cloudron:test .
+
+      - name: Run read-only smoke test
+        run: ./test/smoke.sh anchor-cloudron:test

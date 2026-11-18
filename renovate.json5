@@ -1,0 +1,24 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["config:recommended"],
+  dependencyDashboard: true,
+  labels: ["dependencies"],
+  packageRules: [
+    {
+      matchDepNames: ["zhfahim/anchor"],
+      groupName: "Anchor upstream",
+      rangeStrategy: "replace"
+    }
+  ],
+  customManagers: [
+    {
+      customType: "regex",
+      managerFilePatterns: ["/^CloudronManifest\\.json$/"],
+      matchStrings: ["\\\"upstreamVersion\\\": \\\"(?<currentValue>[^\\\"]+)\\\""],
+      datasourceTemplate: "github-releases",
+      depNameTemplate: "zhfahim/anchor",
+      versioningTemplate: "semver",
+      extractVersionTemplate: "^v(?<version>.+)$"
+    }
+  ]
+}
