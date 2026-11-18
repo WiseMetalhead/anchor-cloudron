@@ -55,6 +55,62 @@
             "creationDate": "Wed, 18 Nov 2026 08:36:44 GMT",
             "ts": "Wed, 18 Nov 2026 08:36:44 GMT",
             "publishState": "testing"
+        },
+        "1.0.1": {
+            "manifest": {
+                "id": "io.github.wisemetalhead.anchor",
+                "title": "Anchor",
+                "version": "1.0.1",
+                "upstreamVersion": "0.18.1",
+                "tagline": "Offline-first, self-hosted notes",
+                "website": "https://github.com/ZhFahim/anchor",
+                "packageUrl": "https://github.com/WiseMetalhead/anchor-cloudron",
+                "packagerName": "WiseMetalhead",
+                "packagerUrl": "https://github.com/WiseMetalhead",
+                "minBoxVersion": "10.1.4",
+                "healthCheckPath": "/api/health",
+                "httpPort": 3000,
+                "memoryLimit": 536870912,
+                "iconUrl": "https://raw.githubusercontent.com/WiseMetalhead/anchor-cloudron/main/logo.png",
+                "description": "# Anchor\n\nAnchor is an offline-first note-taking application with automatic synchronization between the web and mobile clients.\n\nFeatures include rich-text notes, tags, pinning, reminders, search, attachments, archive and trash, import/export, an administration panel, and optional OpenID Connect authentication.\n\nThis package integrates Anchor with Cloudron PostgreSQL, backups, read-only application containers, and the Cloudron user directory.\n",
+                "postInstallMessage": "Anchor is ready at https://$CLOUDRON-APP-FQDN.\n\n<sso>\nCloudron OpenID Connect is enabled and password login is disabled. Sign in with Cloudron; the first user to sign in becomes the Anchor administrator.\n\nUse the app's Access Control view in the Cloudron dashboard to select the users and groups that may sign in.\n</sso>\n\n<nosso>\nCloudron OpenID Connect is disabled. Register the first local account in Anchor; that account becomes the administrator.\n\nAn administrator can later configure another OpenID Connect provider in Anchor's own administration panel. Enabling Cloudron OpenID Connect itself requires reinstalling the app with SSO selected.\n</nosso>\n\nFor the mobile client, use `https://$CLOUDRON-APP-FQDN` as the server URL.\n",
+                "changelog": "* Fix mobile Cloudron OIDC login by using a separate public PKCE client.\n* Require Cloudron 10.1.4 or newer for native OIDC client support.\n",
+                "tags": [
+                    "notes",
+                    "markdown",
+                    "offline",
+                    "productivity"
+                ],
+                "mediaLinks": [
+                    "https://raw.githubusercontent.com/WiseMetalhead/anchor-cloudron/main/screenshots/web-light.png",
+                    "https://raw.githubusercontent.com/WiseMetalhead/anchor-cloudron/main/screenshots/web-dark.png"
+                ],
+                "addons": {
+                    "localstorage": {},
+                    "postgresql": {},
+                    "oidc": {
+                        "loginRedirectUri": "/api/auth/oidc/callback",
+                        "publicClientLoginRedirectUri": "anchor://oidc/callback",
+                        "tokenSignatureAlgorithm": "RS256"
+                    }
+                },
+                "optionalSso": true,
+                "checklist": {
+                    "first-oidc-admin": {
+                        "sso": true,
+                        "message": "Sign in with Cloudron. The first user to sign in becomes the Anchor administrator."
+                    },
+                    "first-local-admin": {
+                        "sso": false,
+                        "message": "Register the first local account. The first registered user becomes the Anchor administrator."
+                    }
+                },
+                "manifestVersion": 2,
+                "dockerImage": "ghcr.io/wisemetalhead/anchor-cloudron@sha256:641dd3226f3e7a8110be628a7714de5e37210971e9a405114e07073a4f2d8d5a"
+            },
+            "creationDate": "Wed, 18 Nov 2026 09:18:27 GMT",
+            "ts": "Wed, 18 Nov 2026 09:18:27 GMT",
+            "publishState": "testing"
         }
     }
 }
